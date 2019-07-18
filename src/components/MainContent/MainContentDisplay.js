@@ -8,6 +8,8 @@
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
+import { ImgStyle } from "../../Widgets/StyledEl";
+import {Container} from "../../Widgets/StyledEl";
 
 function MainContent(){
 
@@ -36,12 +38,13 @@ function MainContent(){
     },[])
 
     return (
-        <div>
-            <h1>{title}</h1>
+        <Container>
             <p>{date}</p>
-            {mediaType === 'video' ? <iframe src={imgs} type='Video'></iframe> : <img src={imgs} /> }
+            <h1>{title}</h1> 
+            <ImgStyle >{mediaType === 'video' ? <iframe src={imgs} type='Video'></iframe> : <img src={imgs} /> }</ImgStyle>          
+            
             <p>{text}</p>
-        </div>
+        </Container>
     )}
 
 export default MainContent

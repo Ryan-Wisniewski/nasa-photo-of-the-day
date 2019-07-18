@@ -6,17 +6,17 @@ import "./App.css";
 import Header from './components/Header/Header'
 import MainContent from './components/MainContent/MainContentDisplay'
 import Footer from './components/Footer/Footer'
+import { Container } from "./Widgets/StyledEl";
+
 
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div>
-        <MainContent />
-      </div>
+    <Container>
+      <Header />      
+      <MainContent />      
       <Footer />
-    </div>
+    </Container>
   );
 }
 
