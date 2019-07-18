@@ -6,21 +6,29 @@
 //step2 useState/useEffect
 
 import React, { useEffect, useState } from "react";
-import CreateCard from "./MainContentData";
 
 import axios from "axios";
 
 function MainContent(){
 
-    const [datas, setDatas] = useState([])
+    const [date, setDate] = useState('')
+    const [title, setTitle] = useState('')
+    const [imgs, setImgs] = useState('')
+    const [mediaType, setMediaType] = useState('')
+    const [text, setText] = useState('')
+
 
     useEffect(()=> {
         axios.get('https://api.nasa.gov/planetary/apod?api_key=zMLaVB0wFViGnOVLw88A9RYjkCdANZMDiHbh2YDt')
             // console.log('https://api.nasa.gov/planetary/apod?api_key=zMLaVB0wFViGnOVLw88A9RYjkCdANZMDiHbh2YDt')
             .then(response => {
-                const dataArray = response.data
-                console.log(dataArray)
-                setDatas(dataArray)
+                const res = response.data
+                console.log(res)
+                setDate(res.date)
+                setTitle(res.title)
+                setImgs(res.url)
+                setMediaType(res.media_type)
+                setText(res.explanation)
             })
             .catch(error => 
                 console.log('Yo axios broked: ', error))
@@ -29,13 +37,11 @@ function MainContent(){
 
     return (
         <div>
-            {datas.map(value => {
-                return (<div>
-                    <CreateCard  data={value} />
-                </div>)
-            })}
+            <h1>{title}</h1>
+            <p>{date}</p>
+            {mediaType === 'video' ? <iframe src={imgs} type='Video'></iframe> : <img src={imgs} /> }
+            <p>{text}</p>
         </div>
     )}
-    console.log('CreateCard: ', CreateCard)
 
 export default MainContent
